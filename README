@@ -1,0 +1,36 @@
+# Analiza NLP a Fenomenului de Code-Switching (Surzhyk) în Social Media
+
+## Descriere
+
+Această lucrare explorează detectarea și analiza fenomenului de **code-switching ucraineano-rus**, cunoscut sub numele de **Surzhyk**, folosind tehnici de Natural Language Processing (NLP) aplicat pe date din rețelele de socializare.
+
+
+## Conținut
+
+| Secțiune | Descriere |
+|---|---|
+| Pregătirea datelor | Corpus de 488 propoziții extrase din social media, anonimizate și importate în Labelbox pentru adnotare la nivel de token |
+| EDA | Analiza morfologică a cuvintelor hibride: lungime medie 6.85 caractere vs. 4.51 pentru cuvinte strict rusești |
+| spaCy baseline | Evaluarea modelului `uk_core_news_sm` — eșuează sistematic pe termeni Surzhyk necunoscuți |
+| Supratokenizare | XLM-RoBERTa fragmentează cuvintele Surzhyk în 3–5 subtokeni față de 1–2 pentru cuvinte literare |
+| ParlLangID-UA-RU | Modelul pre-antrenat nu include clasa `MIX`, producând erori de clasificare pe date informale |
+
+
+## Concluzie
+
+Modelele NLP clasice și cele Transformer pre-antrenate pe text formal nu gestionează eficient Surzhyk-ul din social media. Fenomenul de **supratokenizare** poate fi exploatat ca semnal de detectare în cadrul unui *fine-tuning* dedicat, pe un corpus adnotat cu o clasă explicită pentru interferențe.
+
+
+## Bibliografie
+
+1. Kanishcheva, O. (2026). *ParlLangID-UA-RU: A Model for Language Identification in Code-Switched Ukrainian-Russian Contexts*. Hugging Face Repository. https://huggingface.co/OKanishcheva/ParlLangID-UA-RU
+
+2. Devlin, J., Chang, M.-W., Lee, K., & Toutanova, K. (2019). *BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding*. Proceedings of NAACL-HLT, pp. 4171–4186.
+
+3. Conneau, A., Khandelwal, K., Goyal, N., et al. (2019). *Unsupervised Cross-lingual Representation Learning at Scale*. arXiv:1911.02116.
+
+4. Unidive WG1. (2024). *Creation of a Token-Level Language Identification Dataset for Ukrainian-Russian Code-Switching*. Presentation material, 2nd Unidive General Meeting. https://unidive.lisn.upsaclay.fr/lib/exe/fetch.php?media=meetings:general_meetings:2nd_unidive_general_meeting:48_creation_dataset_of_token_lang.pdf
+
+5. Labelbox, Inc. (2026). *Labelbox: Data labeling platform for training AI*. https://app.labelbox.com
+
+6. Brown University Research Group. (2026). *NLP-UK: Natural Language Processing for Ukrainian*. https://github.com/brown-uk/nlp_uk
