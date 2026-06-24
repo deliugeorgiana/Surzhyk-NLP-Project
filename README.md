@@ -83,14 +83,6 @@ Analiza efectuată demonstrează că modelele NLP clasice și transformerele pre
 * fenomenul de supratokenizare apare constant în reprezentările generate de XLM-RoBERTa;
 * numărul de subtokeni poate fi utilizat ca semnal suplimentar pentru detectarea automată a code-switching-ului.
 
-## Direcții Viitoare
-
-Pentru îmbunătățirea performanței sistemelor NLP asupra limbajului mixt, sunt recomandate:
-
-* extinderea corpusului adnotat;
-* introducerea unei clase explicite **MIX** în modelele de identificare lingvistică;
-* fine-tuning dedicat al modelelor Transformer pe date Surzhyk;
-* integrarea informațiilor privind supratokenizarea în procesul de clasificare.
 
 ## Bibliografie
 
