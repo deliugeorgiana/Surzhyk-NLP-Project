@@ -1,29 +1,41 @@
 # Analiza NLP a Fenomenului de Code-Switching (Surzhyk) în Social Media
-Acest proiect explorează detectarea și analiza fenomenului de **code-switching ucraineano-rus**, cunoscut sub numele de **Surzhyk**, prin aplicarea tehnicilor de Natural Language Processing (NLP) asupra datelor provenite din rețelele de socializare.
 
-##  Structura Proiectului
+Acest proiect explorează detectarea și analiza fenomenului de **code-switching ucraineano-rus**, cunoscut sub numele de **Surzhyk**, prin aplicarea tehnicilor de **Natural Language Processing (NLP)** asupra datelor provenite din rețelele de socializare.
+
+## Descriere
+
+Surzhyk reprezintă o varietate lingvistică mixtă rezultată din interferența dintre ucraineană și rusă, fiind frecvent întâlnită în comunicarea informală online. Deși modelele NLP moderne obțin performanțe ridicate pe texte standardizate, acestea întâmpină dificultăți semnificative în procesarea formelor hibride și a fenomenelor de code-switching.
+
+Scopul proiectului este evaluarea limitărilor modelelor existente și identificarea unor indicatori utili pentru detectarea automată a elementelor Surzhyk.
+
+
+## Structura Proiectului
 
 | Secțiune | Descriere |
-| :--- | :--- |
-| **Pregătirea datelor** | Corpus de 488 propoziții (social media), anonimizate și adnotate la nivel de token în **Labelbox**. |
-| **EDA** | Analiză morfologică: cuvintele hibride au o lungime medie de **6.85 caractere** vs. **4.51** (rusă standard). |
-| **spaCy Baseline** | Evaluarea modelului `uk_core_news_sm` — eșuează sistematic pe termeni Surzhyk necunoscuți. |
-| **Supratokenizare** | **XLM-RoBERTa** fragmentează cuvintele Surzhyk în 3–5 subtokeni (față de 1–2 pentru text literar). |
-| **ParlLangID-UA-RU** | Modelul pre-antrenat nu include clasa `MIX`, generând erori de clasificare pe date informale. |
+|-----------|-----------|
+| **Pregătirea datelor** | Corpus de 488 propoziții din social media, anonimizate și adnotate la nivel de token în Labelbox. |
+| **EDA (Exploratory Data Analysis)** | Analiză morfologică și statistică a distribuției termenilor hibrizi. |
+| **spaCy Baseline** | Evaluarea modelului `uk_core_news_sm` pe date Surzhyk. |
+| **Supratokenizare** | Analiza segmentării cuvintelor prin XLM-RoBERTa. |
+| **Language Identification** | Testarea modelului ParlLangID-UA-RU pe corpusul adnotat. |
 
-##  Concluzii cheie
 
-Modelele NLP clasice și cele de tip Transformer pre-antrenate pe texte formale nu gestionează eficient varietatea Surzhyk. 
+## Dataset
 
-* **Observație:** Fenomenul de **supratokenizare** poate fi utilizat ca un semnal puternic pentru detectarea automată.
-* **Recomandare:** Este necesar un *fine-tuning* dedicat pe un corpus adnotat care să includă o clasă explicită pentru interferențe lingvistice.
+- **Sursă:** postări și comentarii din social media
+- **Dimensiune:** 488 propoziții
+- **Adnotare:** nivel de token
+- **Instrument de etichetare:** Labelbox
+- **Clase lingvistice:** ucraineană, rusă și forme hibride (Surzhyk)
 
-##  Bibliografie
 
-1. **Kanishcheva, O. (2026).** *ParlLangID-UA-RU: A Model for Language Identification in Code-Switched Ukrainian-Russian Contexts*. [Hugging Face](https://huggingface.co/OKanishcheva/ParlLangID-UA-RU).
-2. **Devlin, J., et al. (2019).** *BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding*. NAACL-HLT.
-3. **Conneau, A., et al. (2019).** *Unsupervised Cross-lingual Representation Learning at Scale*. arXiv:1911.02116.
-4. **Unidive WG1 (2024).** *Creation of a Token-Level Language Identification Dataset for Ukrainian-Russian Code-Switching*. [Documentație PDF](https://unidive.lisn.upsaclay.fr/lib/exe/fetch.php?media=meetings:general_meetings:2nd_unidive_general_meeting:48_creation_dataset_of_token_lang.pdf).
-5. **Labelbox, Inc. (2026).** [Labelbox Platform](https://app.labelbox.com).
-6. **Brown University Research Group (2026).** [NLP-UK Repository](https://github.com/brown-uk/nlp_uk).
+## Rezultate Principale
 
+Cuvintele hibride identificate în corpus prezintă o complexitate lexicală mai ridicată:
+
+| Tip token | Lungime medie |
+|------------|---------------|
+| Rusă standard | 4.51 caractere |
+| Surzhyk | 6.85 caractere |
+
+Această diferență sugerează prezența unor procese de compunere și interferență morfologică.
