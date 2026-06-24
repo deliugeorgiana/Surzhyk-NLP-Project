@@ -8,11 +8,11 @@ Scopul principal al cercetării este evaluarea limitărilor modelelor NLP existe
 
 Proiectul este organizat în mai multe etape de analiză și evaluare:
 
-- **Pregătirea Datelor:** Construirea unui corpus format din 488 propoziții extrase din social media, anonimizate și adnotate manual la nivel de token utilizând platforma Labelbox.
-- **Exploratory Data Analysis (EDA):** Analiza statistică și morfologică a termenilor identificați ca aparținând fenomenului Surzhyk.
-- **Evaluarea spaCy:** Testarea modelului pre-antrenat `uk_core_news_sm` pentru identificarea limitărilor în procesarea cuvintelor hibride.
-- **Analiza Tokenizării:** Investigarea comportamentului modelului XLM-RoBERTa asupra tokenilor Surzhyk și măsurarea fenomenului de supratokenizare.
-- **Language Identification:** Evaluarea modelului ParlLangID-UA-RU pe date de tip code-switching ucraineano-rus.
+* **Pregătirea Datelor:** Construirea unui corpus format din 488 propoziții extrase din social media, anonimizate și adnotate manual la nivel de token utilizând platforma Labelbox.
+* **Exploratory Data Analysis (EDA):** Analiza statistică și morfologică a termenilor identificați ca aparținând fenomenului Surzhyk.
+* **Evaluarea spaCy:** Testarea modelului pre-antrenat `uk_core_news_sm` pentru identificarea limitărilor în procesarea cuvintelor hibride.
+* **Analiza Tokenizării:** Investigarea comportamentului modelului XLM-RoBERTa asupra tokenilor Surzhyk și măsurarea fenomenului de supratokenizare.
+* **Language Identification:** Evaluarea modelului ParlLangID-UA-RU pe date de tip code-switching ucraineano-rus.
 
 ## Tehnologii Folosite
 
@@ -38,12 +38,10 @@ Corpusul utilizat în cadrul proiectului conține:
 
 ### Analiza Morfologică
 
-În cadrul EDA au fost analizate caracteristicile lexicale ale termenilor hibrizi și ale cuvintelor standard din limba rusă.
-
-Rezultatele au evidențiat diferențe semnificative:
+În cadrul EDA au fost analizate caracteristicile lexicale ale termenilor hibrizi și ale cuvintelor standard din limba rusă. Rezultatele au evidențiat diferențe semnificative:
 
 | Tip token | Lungime medie |
-|------------|---------------|
+| :--- | :--- |
 | Rusă standard | 4.51 caractere |
 | Surzhyk | 6.85 caractere |
 
@@ -51,15 +49,7 @@ Aceste rezultate sugerează existența unor procese complexe de interferență m
 
 ### Evaluarea Modelului spaCy
 
-Modelul ucrainean pre-antrenat:
-
-```python
-uk_core_news_sm
-```
-
-a fost evaluat pe corpusul adnotat.
-
-Rezultatele au indicat:
+Modelul ucrainean pre-antrenat `uk_core_news_sm` a fost evaluat pe corpusul adnotat. Rezultatele au indicat:
 
 * dificultăți în recunoașterea termenilor Surzhyk;
 * etichetări morfologice inconsistente;
@@ -67,12 +57,10 @@ Rezultatele au indicat:
 
 ### Analiza XLM-RoBERTa
 
-Pentru evaluarea reprezentărilor subword a fost utilizat modelul XLM-RoBERTa.
-
-S-a observat fenomenul de **supratokenizare**, caracterizat prin fragmentarea excesivă a termenilor Surzhyk:
+Pentru evaluarea reprezentărilor subword a fost utilizat modelul XLM-RoBERTa. S-a observat fenomenul de **supratokenizare**, caracterizat prin fragmentarea excesivă a termenilor Surzhyk:
 
 | Tip text | Număr mediu de subtokeni |
-|-----------|-------------------------|
+| :--- | :--- |
 | Text literar | 1–2 |
 | Surzhyk | 3–5 |
 
@@ -80,9 +68,7 @@ Această observație sugerează că numărul de subtokeni poate reprezenta un in
 
 ### Evaluarea ParlLangID-UA-RU
 
-Modelul ParlLangID-UA-RU a fost analizat pentru sarcina de identificare a limbii la nivel de token.
-
-Principalele limitări observate:
+Modelul ParlLangID-UA-RU a fost analizat pentru sarcina de identificare a limbii la nivel de token. Principalele limitări observate:
 
 * lipsa unei clase dedicate pentru forme mixte (`MIX`);
 * clasificarea forțată a tokenilor în ucraineană sau rusă;
@@ -90,9 +76,7 @@ Principalele limitări observate:
 
 ## Rezultate și Concluzii
 
-Analiza efectuată demonstrează că modelele NLP clasice și transformerele pre-antrenate pe corpusuri standardizate nu gestionează eficient varietatea Surzhyk.
-
-Principalele concluzii sunt:
+Analiza efectuată demonstrează că modelele NLP clasice și transformerele pre-antrenate pe corpusuri standardizate nu gestionează eficient varietatea Surzhyk. Principalele concluzii sunt:
 
 * termenii Surzhyk sunt, în medie, mai lungi și mai complecși din punct de vedere morfologic;
 * modelele de identificare lingvistică întâmpină dificultăți în clasificarea formelor hibride;
@@ -116,4 +100,3 @@ Pentru îmbunătățirea performanței sistemelor NLP asupra limbajului mixt, su
 4. Unidive WG1 (2024). *Creation of a Token-Level Language Identification Dataset for Ukrainian-Russian Code-Switching*.
 5. Labelbox, Inc. (2026). *Labelbox Platform*.
 6. Brown University Research Group (2026). *NLP-UK Repository*.
-
