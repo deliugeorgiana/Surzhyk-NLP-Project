@@ -1,41 +1,119 @@
 # Analiza NLP a Fenomenului de Code-Switching (Surzhyk) în Social Media
 
-Acest proiect explorează detectarea și analiza fenomenului de **code-switching ucraineano-rus**, cunoscut sub numele de **Surzhyk**, prin aplicarea tehnicilor de **Natural Language Processing (NLP)** asupra datelor provenite din rețelele de socializare.
+Acest proiect investighează detectarea și analiza fenomenului de **code-switching ucraineano-rus**, cunoscut sub numele de **Surzhyk**, prin aplicarea tehnicilor moderne de **Natural Language Processing (NLP)** asupra datelor colectate din rețelele de socializare.
 
-## Descriere
-
-Surzhyk reprezintă o varietate lingvistică mixtă rezultată din interferența dintre ucraineană și rusă, fiind frecvent întâlnită în comunicarea informală online. Deși modelele NLP moderne obțin performanțe ridicate pe texte standardizate, acestea întâmpină dificultăți semnificative în procesarea formelor hibride și a fenomenelor de code-switching.
-
-Scopul proiectului este evaluarea limitărilor modelelor existente și identificarea unor indicatori utili pentru detectarea automată a elementelor Surzhyk.
-
+Scopul principal al cercetării este evaluarea limitărilor modelelor NLP existente în procesarea limbajului mixt și identificarea unor indicatori relevanți pentru detectarea automată a interferențelor lingvistice. Studiul evidențiază dificultățile întâmpinate de modelele pre-antrenate pe texte formale atunci când sunt aplicate pe conținut informal provenit din social media.
 
 ## Structura Proiectului
 
-| Secțiune | Descriere |
-|-----------|-----------|
-| **Pregătirea datelor** | Corpus de 488 propoziții din social media, anonimizate și adnotate la nivel de token în Labelbox. |
-| **EDA (Exploratory Data Analysis)** | Analiză morfologică și statistică a distribuției termenilor hibrizi. |
-| **spaCy Baseline** | Evaluarea modelului `uk_core_news_sm` pe date Surzhyk. |
-| **Supratokenizare** | Analiza segmentării cuvintelor prin XLM-RoBERTa. |
-| **Language Identification** | Testarea modelului ParlLangID-UA-RU pe corpusul adnotat. |
+Proiectul este organizat în mai multe etape de analiză și evaluare:
 
+- **Pregătirea Datelor:** Construirea unui corpus format din 488 propoziții extrase din social media, anonimizate și adnotate manual la nivel de token utilizând platforma Labelbox.
+- **Exploratory Data Analysis (EDA):** Analiza statistică și morfologică a termenilor identificați ca aparținând fenomenului Surzhyk.
+- **Evaluarea spaCy:** Testarea modelului pre-antrenat `uk_core_news_sm` pentru identificarea limitărilor în procesarea cuvintelor hibride.
+- **Analiza Tokenizării:** Investigarea comportamentului modelului XLM-RoBERTa asupra tokenilor Surzhyk și măsurarea fenomenului de supratokenizare.
+- **Language Identification:** Evaluarea modelului ParlLangID-UA-RU pe date de tip code-switching ucraineano-rus.
 
-## Dataset
+## Tehnologii Folosite
 
-- **Sursă:** postări și comentarii din social media
-- **Dimensiune:** 488 propoziții
-- **Adnotare:** nivel de token
-- **Instrument de etichetare:** Labelbox
-- **Clase lingvistice:** ucraineană, rusă și forme hibride (Surzhyk)
+* **Python**
+* **spaCy**
+* **Hugging Face Transformers**
+* **XLM-RoBERTa**
+* **Pandas**
+* **Matplotlib**
+* **Jupyter Notebook**
+* **Labelbox**
 
+## Metodologie
 
-## Rezultate Principale
+### Adnotarea Datelor
 
-Cuvintele hibride identificate în corpus prezintă o complexitate lexicală mai ridicată:
+Corpusul utilizat în cadrul proiectului conține:
+
+* 488 propoziții extrase din social media;
+* date anonimizate pentru protejarea identității utilizatorilor;
+* etichetare manuală la nivel de token;
+* clasificarea tokenilor în categorii lingvistice relevante pentru analiza code-switching-ului.
+
+### Analiza Morfologică
+
+În cadrul EDA au fost analizate caracteristicile lexicale ale termenilor hibrizi și ale cuvintelor standard din limba rusă.
+
+Rezultatele au evidențiat diferențe semnificative:
 
 | Tip token | Lungime medie |
 |------------|---------------|
 | Rusă standard | 4.51 caractere |
 | Surzhyk | 6.85 caractere |
 
-Această diferență sugerează prezența unor procese de compunere și interferență morfologică.
+Aceste rezultate sugerează existența unor procese complexe de interferență morfologică și lexicală între cele două limbi.
+
+### Evaluarea Modelului spaCy
+
+Modelul ucrainean pre-antrenat:
+
+```python
+uk_core_news_sm
+```
+
+a fost evaluat pe corpusul adnotat.
+
+Rezultatele au indicat:
+
+* dificultăți în recunoașterea termenilor Surzhyk;
+* etichetări morfologice inconsistente;
+* clasificarea frecventă a cuvintelor hibride ca tokeni necunoscuți.
+
+### Analiza XLM-RoBERTa
+
+Pentru evaluarea reprezentărilor subword a fost utilizat modelul XLM-RoBERTa.
+
+S-a observat fenomenul de **supratokenizare**, caracterizat prin fragmentarea excesivă a termenilor Surzhyk:
+
+| Tip text | Număr mediu de subtokeni |
+|-----------|-------------------------|
+| Text literar | 1–2 |
+| Surzhyk | 3–5 |
+
+Această observație sugerează că numărul de subtokeni poate reprezenta un indicator util pentru detectarea automată a formelor hibride.
+
+### Evaluarea ParlLangID-UA-RU
+
+Modelul ParlLangID-UA-RU a fost analizat pentru sarcina de identificare a limbii la nivel de token.
+
+Principalele limitări observate:
+
+* lipsa unei clase dedicate pentru forme mixte (`MIX`);
+* clasificarea forțată a tokenilor în ucraineană sau rusă;
+* performanță redusă pe texte informale și fenomene de code-switching.
+
+## Rezultate și Concluzii
+
+Analiza efectuată demonstrează că modelele NLP clasice și transformerele pre-antrenate pe corpusuri standardizate nu gestionează eficient varietatea Surzhyk.
+
+Principalele concluzii sunt:
+
+* termenii Surzhyk sunt, în medie, mai lungi și mai complecși din punct de vedere morfologic;
+* modelele de identificare lingvistică întâmpină dificultăți în clasificarea formelor hibride;
+* fenomenul de supratokenizare apare constant în reprezentările generate de XLM-RoBERTa;
+* numărul de subtokeni poate fi utilizat ca semnal suplimentar pentru detectarea automată a code-switching-ului.
+
+## Direcții Viitoare
+
+Pentru îmbunătățirea performanței sistemelor NLP asupra limbajului mixt, sunt recomandate:
+
+* extinderea corpusului adnotat;
+* introducerea unei clase explicite **MIX** în modelele de identificare lingvistică;
+* fine-tuning dedicat al modelelor Transformer pe date Surzhyk;
+* integrarea informațiilor privind supratokenizarea în procesul de clasificare.
+
+## Bibliografie
+
+1. Kanishcheva, O. (2026). *ParlLangID-UA-RU: A Model for Language Identification in Code-Switched Ukrainian-Russian Contexts*.
+2. Devlin, J., Chang, M.-W., Lee, K., & Toutanova, K. (2019). *BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding*.
+3. Conneau, A., Khandelwal, K., Goyal, N., et al. (2019). *Unsupervised Cross-lingual Representation Learning at Scale*.
+4. Unidive WG1 (2024). *Creation of a Token-Level Language Identification Dataset for Ukrainian-Russian Code-Switching*.
+5. Labelbox, Inc. (2026). *Labelbox Platform*.
+6. Brown University Research Group (2026). *NLP-UK Repository*.
+
