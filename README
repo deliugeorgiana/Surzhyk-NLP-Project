@@ -1,5 +1,4 @@
 # Analiza NLP a Fenomenului de Code-Switching (Surzhyk) în Social Media
-
 Acest proiect explorează detectarea și analiza fenomenului de **code-switching ucraineano-rus**, cunoscut sub numele de **Surzhyk**, prin aplicarea tehnicilor de Natural Language Processing (NLP) asupra datelor provenite din rețelele de socializare.
 
 ##  Structura Proiectului
@@ -11,7 +10,6 @@ Acest proiect explorează detectarea și analiza fenomenului de **code-switching
 | **spaCy Baseline** | Evaluarea modelului `uk_core_news_sm` — eșuează sistematic pe termeni Surzhyk necunoscuți. |
 | **Supratokenizare** | **XLM-RoBERTa** fragmentează cuvintele Surzhyk în 3–5 subtokeni (față de 1–2 pentru text literar). |
 | **ParlLangID-UA-RU** | Modelul pre-antrenat nu include clasa `MIX`, generând erori de clasificare pe date informale. |
-
 
 ##  Concluzii cheie
 
